@@ -1,0 +1,44 @@
+.NotFound {
+    margin: 0 auto;
+    width: fit-content;
+    text-align: center;
+}
+
+.NotFound span {
+    position: relative;
+    color: #fff;
+    font-weight: 900;
+    font-size: 20.4em;
+    display: block;
+    overflow: hidden;
+    width: fit-content;
+    height: max-content;
+}
+
+@media screen and (max-width: 600px) {
+    .NotFound span {
+        margin: 0 auto;
+
+        font-size: 10em;
+    }
+}
+
+.NotFound span::first-letter {
+    letter-spacing: 12vmax
+}
+ .NotFound span::before {
+    content: '';
+    background-image: url('https://staticdelivery.nexusmods.com/mods/1151/images/528-0-1447526230.png');
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    animation: rotateIn 0.5s ease-out;
+}
+
+.NotFound p {
+    font-size: 2rem;
+}
+

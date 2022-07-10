@@ -1,44 +1,62 @@
-import { useState } from 'react'
-import logo from './logo.svg'
+import { useState, useEffect } from 'react'
+import {UseLocation} from './hooks/UseLocation';
+import Banner from './components/Banner';
+import InputSearch from './components/InputSearch';
+import Location from './components/Location';
+import ResidentList from './components/ResidentList';
+import Footer from './components/Footer';
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [url, setUrl] = useState(``);
+  const [locations, setLocations] = useState([]);
+  const location = useLocation(url);
+  
+  const handlerSubmit = (e, inputValue,setInputValue) => {
+      e.preventDefault();
+      if (e.nativeEvent.submitter) {
+          if (!inputValue) return console.warn('No se ha ingresado ningun id ó nombre de una ubicación');
+      }
+      setUrl(`https://rickandmortyapi.com/api/location/${e.target.id.value || e.target.location.value}`);
+      setInputValue('');
+  }
+
+  useEffect(() => {
+      const getLocations = async () => {
+          let loadedLocations = [];
+          let firstFecth = await fetch('https://rickandmortyapi.com/api/location/').then(res => res.json());
+          let limit = firstFecth.info.pages;
+          let currentFetch = firstFecth;
+          for (let i = 1; i <= limit; i++) {
+              loadedLocations = loadedLocations.concat(currentFetch.results.map(location => {
+                  return {
+                      id: location.id,
+                      name: location.name,
+                  }
+              }));
+
+              if (i <= (limit - 1)) currentFetch = await fetch(currentFetch.info.next).then(res => res.json());
+          };
+          setLocations(loadedLocations);
+          setUrl(`https://rickandmortyapi.com/api/location/${1 + Math.round(Math.random() * (loadedLocations.length - 1))}`);
+      }
+      getLocations();
+  }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+      <>
+          <Banner />
+          <div className="content">
+              <h1>Wiki de lugares de Rick and Morty</h1>
+              <InputSearch handlerSubmit={handlerSubmit} locations={locations}/>
+              <Location location={location} />
+              <ResidentList
+                  location={location}
+                  quantyCardsPerPage={20}
+              />
+          </div>
+          <Footer />
+      </>
   )
 }
 

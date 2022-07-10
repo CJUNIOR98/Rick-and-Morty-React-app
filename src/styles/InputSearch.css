@@ -1,0 +1,38 @@
+.InputSearch {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+}
+
+.InputSearch__container {
+    position: relative;
+
+    flex-grow: 19;
+    min-width: 195px;
+}
+
+.InputSearch__input {
+    width: 100%;
+    min-width: 195px;
+    padding: 2rem;
+
+    text-align: center;
+
+    background-color: var(--card-background);
+    color: var(--color-letter);
+    border: none;
+}
+
+.InputSearch__button {
+    flex-grow: 1;
+
+    font-weight: 600;
+
+    background-color: var(--background-color);
+    color: var(--color-letter);
+    border-right-color: black;
+    border-bottom-color: black;
+    border-top-width: 1px;
+
+    cursor: pointer;
+}
