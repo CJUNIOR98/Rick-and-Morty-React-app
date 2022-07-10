@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {UseLocation} from './hooks/UseLocation';
+import {useLocation} from './hooks/UseLocation';
 import Banner from './components/Banner';
 import InputSearch from './components/InputSearch';
 import Location from './components/Location';
