@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ResidentInfo from './ResidentInfo';
-import '../styles/ResidentList.css';
+/* import '../styles/ResidentList.css'; */
 import NotFound from './NotFound';
 import NoResidents from './NoResidents';
 import Pagination from './Pagination';
