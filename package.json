@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "start": "rollup",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -16,6 +17,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "rollup": "^2.76.0",
     "vite": "^2.9.9"
   },
   "description": "Proyecto de práctica de ReactJS sobre consumo de API's, customs hooks e inputs controlados. \r Carlos Junior Mejía Acuña 2022",
